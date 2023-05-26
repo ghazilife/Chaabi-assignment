@@ -125,3 +125,262 @@ output:-
 
 
 
+Q4. The power of one line -
+Given a dictionary, switch position of key and values in the dict, i.e., value becomes the key and
+key becomes value. The function's body shouldn't have more than one statement.
+f({
+"key1": "value1",
+"key2": "value2",
+"key3": "value3",
+"key4": "value4",
+"key5": "value5"
+}) should return
+{
+"value1": "key1",
+"value2": "key2",
+"value3": "key3",
+"value4": "key4",
+"value5": "key5"
+}
+
+code:-
+
+
+input_dict = {
+    "key1": "value1",
+    "key2": "value2",
+    "key3": "value3",
+    "key4": "value4",
+    "key5": "value5"
+}
+
+switched_dict = switch_dict(input_dict)
+print(switched_dict)
+
+output:-
+{
+    "value1": "key1",
+    "value2": "key2",
+    "value3": "key3",
+    "value4": "key4",
+    "value5": "key5"
+}
+
+
+Q5. Common, Not Common
+Given 2 lists in input. Write a program to return the elements, which are common to both
+lists(set intersection) and those which are not common(set symmetric difference) between the
+lists.
+Input:
+Mainstream = ["One Punch Man","Attack On Titan","One Piece","Sword
+Art Online","Bleach","Dragon Ball Z","One Piece"]
+must_watch = ["Full Metal Alchemist","Code Geass","Death
+Note","Stein's Gate","The Devil is a Part Timer!","One Piece","Attack
+On Titan"]
+f(mainstream, must_watch) should return:
+["One Piece", "Attack On Titan"], ["Dragon Ball Z", "Death Note",
+"One Punch Man", "Stein's Gate", "The Devil is a Part Timer!", "Sword
+Art Online","Full Metal Alchemist","'Bleach", "Code Geass"]
+
+
+code:-
+
+def compare_lists(list1, list2):
+    common_elements = list(set(list1) & set(list2))
+    not_common_elements = list(set(list1) ^ set(list2))
+    return common_elements, not_common_elements
+
+
+mainstream = ["One Punch Man", "Attack On Titan", "One Piece", "Sword Art Online", "Bleach", "Dragon Ball Z", "One Piece"]
+must_watch = ["Full Metal Alchemist", "Code Geass", "Death Note", "Stein's Gate", "The Devil is a Part Timer!", "One Piece", "Attack On Titan"]
+
+common, not_common = compare_lists(mainstream, must_watch)
+print(common)
+print(not_common)
+
+
+output:-
+
+['One Piece', 'Attack On Titan']
+['Dragon Ball Z', 'One Punch Man', "Sword Art Online", "Full Metal Alchemist", 'Stein\'s Gate', 'Code Geass', 'Death Note', 'The Devil is a Part Timer!', 'Bleach']
+
+
+Q6. Every other sub-list
+Given a list and 2 indices as input, return the sub-list enclosed within these 2 indices. It should
+contain every second element.
+E.g.
+Input f([2,3,5,7,11,13,17,19,23,29,31,37,41], 2, 9)
+Return [5, 11, 17, 23]
+
+
+code:-
+
+def get_sublist_with_every_other_element(lst, start_index, end_index):
+    sublist = lst[start_index:end_index+1]
+    every_other_sublist = sublist[::2]
+    return every_other_sublist
+
+
+input_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
+start_index = 2
+end_index = 9
+
+result = get_sublist_with_every_other_element(input_list, start_index, end_index)
+print(result)
+
+
+output:-
+
+[5, 11, 17, 23]
+
+
+
+Q7. Calculate the factorial of a number using lambda function.
+
+
+code:-
+
+from functools import reduce
+
+factorial = lambda n: reduce(lambda x, y: x * y, range(1, n+1))
+
+number = 5
+result = factorial(number)
+print(result)
+
+output:-
+
+120
+
+
+
+Q8. Some neat tricks up her sleeve:
+Looking at the below code, write down the final values of A0, A1, ...An
+A0 = dict(zip(('a','b','c','d','e'),(1,2,3,4,5)))
+A1 = range(10)
+A2 = sorted([i for i in A1 if i in A0])
+A3 = sorted([A0[s] for s in A0])
+A4 = [i for i in A1 if i in A3]
+A5 = {i:i*i for i in A1}
+A6 = [[i,i*i] for i in A1]
+A7 = reduce(lambda x,y: x+y, [10,23, -45, 33])
+A8 = map(lambda x: x*2, [1,2,3,4])
+A9 = filter(lambda x: len(x) >3, [“I” , “want”, “to”, “learn”, “python”])
+
+
+answer:-
+
+A0 = dict(zip(('a', 'b', 'c', 'd', 'e'), (1, 2, 3, 4, 5)))
+The zip() function combines two iterables, and dict() creates a dictionary from the resulting pairs. The final value of A0 is {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}.
+
+A1 = range(10)
+The range() function generates a sequence of numbers from 0 to 9. The final value of A1 is range(0, 10).
+
+A2 = sorted([i for i in A1 if i in A0])
+This line uses a list comprehension to filter A1 based on whether each element exists as a key in A0. The resulting list is then sorted. The final value of A2 is [1, 2, 3, 4, 5].
+
+A3 = sorted([A0[s] for s in A0])
+Here, a list comprehension is used to extract the values of A0 corresponding to its keys. The resulting list is sorted. The final value of A3 is [1, 2, 3, 4, 5].
+
+A4 = [i for i in A1 if i in A3]
+This line filters A1 based on whether each element exists in A3. The final value of A4 is [1, 2, 3, 4, 5].
+
+A5 = {i: i * i for i in A1}
+This line uses a dictionary comprehension to create a dictionary where the keys are the elements from A1, and the values are the square of each element. The final value of A5 is {0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}.
+
+A6 = [[i, i * i] for i in A1]
+This line uses a list comprehension to create a list of lists, where each inner list contains an element from A1 and its square. The final value of A6 is [[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]].
+
+A7 = reduce(lambda x, y: x + y, [10, 23, -45, 33])
+The reduce() function is used with a lambda function that adds two elements together. It is applied iteratively to the list [10, 23, -45, 33]. The final value of A7 is 21.
+
+A8 = map(lambda x: x * 2, [1, 2, 3, 4])
+The map() function applies the lambda function (doubling the input) to each element in the list [1, 2, 3, 4]. The final value of A8 is an iterator object: map object at 0x....
+
+A9 = filter(lambda x: len(x) > 3, ["I", "want", "to", "learn", "python"])
+The filter() function applies the lambda function (checking the length of the input) to each element in the list ["I", "want", "to", "learn", "python"]. It keeps the elements for which the lambda function returns True. The final value of A9 is an iterator object: filter object at 0x....
+
+
+Q9.
+Write a func that takes 3 args:
+from_date - string representing a date in the form of 'yy-mm-dd'
+to_date - string representing a date in the form of 'yy-mm-dd'
+difference - int
+Returns True if from_date and to_date are less than difference days away from each other, else
+returns False.
+
+code:-
+
+from datetime import datetime, timedelta
+
+def is_date_difference_less(from_date, to_date, difference):
+    # Convert the date strings to datetime objects
+    from_datetime = datetime.strptime(from_date, '%y-%m-%d')
+    to_datetime = datetime.strptime(to_date, '%y-%m-%d')
+
+    # Calculate the difference between the dates
+    date_difference = abs((to_datetime - from_datetime).days)
+
+    # Compare the difference with the specified number of days
+    if date_difference < difference:
+        return True
+    else:
+        return False
+result = is_date_difference_less('21-05-01', '21-05-10', 10)
+print(result)  # Output: True
+
+output:-
+true
+
+Q10. Of date and days
+Write a func that takes 2 args:
+date - string representing a date in the form of 'yy-mm-dd'
+n - integer
+Returns the string representation of date n days before 'date'
+E.g. f('16-12-10', 11) should return '16-11-29'
+
+code:-
+
+from datetime import datetime, timedelta
+
+def get_date_before(date, n):
+    # Convert the date string to a datetime object
+    date_obj = datetime.strptime(date, '%y-%m-%d')
+
+    # Calculate the date n days before the given date
+    before_date = date_obj - timedelta(days=n)
+
+    # Convert the resulting date to a string representation
+    before_date_str = before_date.strftime('%y-%m-%d')
+
+    return before_date_str
+result = get_date_before('16-12-10', 11)
+print(result)  # Output: 16-11-29
+
+output:-
+
+16-11-29
+
+
+
+Q11. Something fishy there -
+Find output of following:
+def f(x,l=[]):
+for i in range(x):
+l.append(i*i)
+print(l)
+f(2)
+f(3,[3,2,1])
+f(3)
+
+output:-
+
+[0, 1]
+[3, 2, 1, 0, 1, 4]
+[0, 1, 0, 1, 4]
+
+
+thanks & regarding
+
+MO JUNED
+mail:-mojunedgazi@gmail.com
